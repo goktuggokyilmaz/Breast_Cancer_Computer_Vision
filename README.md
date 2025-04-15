@@ -11,19 +11,16 @@ This project presents a classical computer vision pipeline for detecting mitosis
   - [2. Feature Extraction](#2-feature-extraction)
   - [3. Classification](#3-classification)
 - [Results](#results)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Future Work](#future-work)
 
 ---
 
-## 📖 Introduction
+## Introduction
 
 Mitotic figures in breast cancer histology slides are key indicators of tumor proliferation. Manual counting is time-consuming and inconsistent. This project proposes a low-resource automated detection approach using classical image processing and machine learning techniques.
 
 ---
 
-## 📂 Dataset
+## Dataset
 
 We use breast cancer histopathology slides from five patients (A00–A04). Each image is 2084 × 2084 pixels and comes with CSV annotations of mitosis coordinates.
 
@@ -33,7 +30,7 @@ We use breast cancer histopathology slides from five patients (A00–A04). Each 
 
 ---
 
-## 🔍 Pipeline Overview
+## Pipeline Overview
 
 ### 1. Preprocessing & Segmentation
 
@@ -61,3 +58,28 @@ Each segmented cell region is represented by a hybrid feature vector containing:
       min_samples_split=4,
       class_weight="balanced"
   )
+
+## Results
+
+The performance of the proposed mitosis detection pipeline was evaluated using two main metrics:
+
+- **F1 Score**: Measures the balance between precision and recall for mitosis classification.
+- **Pixel-wise Intersection over Union (IoU)**: Evaluates spatial overlap between predicted mitosis regions and ground truth annotations.
+
+### Validation Set Results (A02)
+
+| Class        | Precision | Recall | F1 Score |
+|--------------|-----------|--------|----------|
+| Non-Mitotic  | 0.99      | 1.00   | 0.99     |
+| Mitotic      | 0.42      | 0.21   | 0.28     |
+
+- **Overall F1 Score**: `0.278`  
+- **IoU (A02 - Validation Set)**: `0.1089`
+
+### Test Set Results (A00)
+
+- **IoU (A00 - Test Set)**: `0.2627`
+
+Despite the highly imbalanced dataset and the challenges of detecting small, diverse mitotic figures, the model was able to generalize moderately well on unseen data. The results show potential for practical use in assisting manual diagnosis, especially with further refinements.
+
+
